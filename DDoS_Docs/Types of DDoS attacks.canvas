@@ -1,0 +1,31 @@
+{
+	"nodes":[
+		{"id":"d0d0ce4fd7d98b20","type":"text","text":"Types of DDoS Attacks","x":-180,"y":-120,"width":250,"height":60,"color":"6"},
+		{"id":"146af1f11baadf14","type":"text","text":"Voluminous Attacks or \nFlood Attacks","x":-540,"y":-120,"width":250,"height":60,"color":"5"},
+		{"id":"b095fa1f9a1668b2","type":"text","text":"**UDP Storm Attack**:\n• UDP has relatively less overhead in the network and thus effectively used by attackers to perform a UDP flood attack.\n• \"Best effort\" data traffic is pushed by attackers through UDP path to overwhelm an online service or machine.","x":-1360,"y":-300,"width":659,"height":160},
+		{"id":"849fc81176c4ad98","type":"text","text":"**Smurf Attack**:\n• An attacker creates a data packet having ICMP message with a spoofed IP address of the victim and then broadcasts it in the network.\n• Whosoever receives this data packet, will respond to embedded IP packet with a reply which makes victim node flood with ICMP responses.","x":-1360,"y":-560,"width":659,"height":160},
+		{"id":"8cea27834d68aa18","type":"text","text":"**DNS Flooding Attack**:\n• DNS requests are sent with spoofed IP address to DNS server and this would make DNS server to direct all its responses to the target node.\n","x":-1360,"y":2,"width":659,"height":98},
+		{"id":"0565bbf9f9563ae4","type":"text","text":"**Peer to Peer Attack**:\n• P2P technology is being widely used for file sharing and downloading and distributed computing, this attack type targets these networks.\n• Automated feature of P2P botnet helps in amplifying the attack to a great extent.\n","x":-1360,"y":160,"width":659,"height":160},
+		{"id":"678b03b2bf709a00","type":"text","text":"Application Layer Attacks","x":52,"y":-322,"width":265,"height":60,"color":"5"},
+		{"id":"455f72dc8e549708","type":"text","text":"Protocol Based Attack","x":52,"y":100,"width":250,"height":60,"color":"5"},
+		{"id":"e58c103d3df325aa","type":"text","text":"**TCP SYN**\n• An attacker sends a connection request to server using SYN flag to which server responds with an acknowledgement using SYN-ACK flag.\n• A legitimate client would respond to this SYN-ACK packet with an ACK flag. However, a malicious user exploits this feature and does not send this acknowledgement to the server. \n•  Likely, this would end up in exhaustion of memory at server side as there are a large number of half open connections at server. Server tends to wait for ACK until the timer expires.","x":-168,"y":460,"width":690,"height":258},
+		{"id":"eff63a23d88df2b0","type":"text","text":"**Ping of Death**\n• It exploits basic TCP/IP structure of Internet.\n• Over sized malformed data packets are sent to the victim using ping command. Generally, maximum payload size of a data packet is 84 bytes. It is not allowed to send a data packet larger than this size. Therefore, an attacker breaks a large-sized data packet into fragments and send them to the victim node.\n• When victim node reassembles all the fragments, the resultant size is larger than 84 bytes resulting into crashing of server or machine.","x":620,"y":202,"width":640,"height":258},
+		{"id":"675495a8cec9ab2c","type":"text","text":"**Tear Drop Attack**\n• Reassembly algorithm and fragment offset field of IP packet are exploited in this attack.\n• An attacker creates inconsistency in the fragment offset field of a packet and when all the fragments are reassembled at the server, then overlapping of packets occurs resulting into crashing of server. ","x":620,"y":-120,"width":400,"height":258},
+		{"id":"f7404fc3083db744","type":"text","text":"**HTTP Flood**\n• This attack is complete in itself to make a server completely paralyze. Generally, a user utilities HTTP GET and POST command to communicate with the server. GET is used for retaining static content and POST is used for retaining dynamic content on the web. HTTP POST command usually consumes a large number of resources and an attacker takes advantage of this fact.\n• It is slow rate attack, and therefore, is difficult to detect.","x":620,"y":-562,"width":735,"height":240},
+		{"id":"c0658a5adf472661","type":"text","text":"**Slowloris Attack**\n• Similar to HTTP flood attack, it is also a slow rate attack and sends incomplete information to the server. It makes server to wait indefinitely for the complete information. In other words, an attacker sends HTTP GET request without termination code.\n• It slowly exhausts the connection capability of server.","x":-55,"y":-780,"width":577,"height":182}
+	],
+	"edges":[
+		{"id":"133f3b87a28508b7","fromNode":"d0d0ce4fd7d98b20","fromSide":"bottom","toNode":"455f72dc8e549708","toSide":"left"},
+		{"id":"4c533d3c522234bc","fromNode":"d0d0ce4fd7d98b20","fromSide":"left","toNode":"146af1f11baadf14","toSide":"right"},
+		{"id":"9b322af02c5e29e9","fromNode":"d0d0ce4fd7d98b20","fromSide":"top","toNode":"678b03b2bf709a00","toSide":"left"},
+		{"id":"ab74542e1441c765","fromNode":"146af1f11baadf14","fromSide":"left","toNode":"8cea27834d68aa18","toSide":"right"},
+		{"id":"407963d639941529","fromNode":"146af1f11baadf14","fromSide":"left","toNode":"b095fa1f9a1668b2","toSide":"right"},
+		{"id":"c5738d9ba6cccad5","fromNode":"146af1f11baadf14","fromSide":"left","toNode":"0565bbf9f9563ae4","toSide":"right"},
+		{"id":"88e059e76a1cc768","fromNode":"146af1f11baadf14","fromSide":"left","toNode":"849fc81176c4ad98","toSide":"right"},
+		{"id":"bec261774dfb2e42","fromNode":"455f72dc8e549708","fromSide":"bottom","toNode":"e58c103d3df325aa","toSide":"top"},
+		{"id":"13cb552235b0eb8f","fromNode":"455f72dc8e549708","fromSide":"bottom","toNode":"eff63a23d88df2b0","toSide":"left"},
+		{"id":"2122b422dc180b65","fromNode":"455f72dc8e549708","fromSide":"right","toNode":"675495a8cec9ab2c","toSide":"left"},
+		{"id":"11861c9ebd4d3548","fromNode":"678b03b2bf709a00","fromSide":"right","toNode":"f7404fc3083db744","toSide":"left"},
+		{"id":"5c477373e148a80b","fromNode":"678b03b2bf709a00","fromSide":"top","toNode":"c0658a5adf472661","toSide":"bottom"}
+	]
+}
