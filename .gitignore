@@ -1,0 +1,7 @@
+.vscode
+.obsidian
+__pycache__
+*_venv
+temp*
+
+ddos_vscode_connection.session.sql

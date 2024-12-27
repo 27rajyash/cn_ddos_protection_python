@@ -15,4 +15,3 @@ def bubble_sort():
     return temp_list
 
 temp_list = bubble_sort()
-print(temp_list)

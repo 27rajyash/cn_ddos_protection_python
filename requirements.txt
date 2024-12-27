@@ -1,0 +1,22 @@
+# DO NOT RUN pip install requirements.txt!!!
+
+# Running this python project will require extensive configuration, however I will create a shell script and a batch file to automate that process in the future, for now you have to deal with the following instructions.
+
+# It is recommended that you do not download any of the following libraries in the global setting.
+# However if you wish, you can install the following dependencies in the global settings.
+psutil
+mysql   # This one you have to install global using your package manager (pacman for my arch).
+        # I've written a shell script to automate the installation of this one at ./setup, for you I've written it in Mac.
+        # Remember to type in your own root password for both your system and mysqlserver before executing the file.
+        # Just keep in mind that it is untested. 
+
+#The following dependencies HAVE to be installed in their respective python virtual environments.
+
+#./webserver/(webs_venv)
+flask
+gunicorn
+mysql-connector-python
+matplotlib
+
+#./attacker/(attacker_venv)
+reqwest

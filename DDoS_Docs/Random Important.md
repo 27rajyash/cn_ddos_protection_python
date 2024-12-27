@@ -1,5 +1,0 @@
-- DDoS protection services are provided by companies like Cloudflare and AWS. Although functional they cost a lot of money to employ, rightfully so, I cannot imagine the amount of resources that they must have to provide event to route all the traffic through their reverse proxies.
-
-- In computer networks, a ==reverse_proxy== or surrogate server is a proxy server that appears to any client to be an ordinary web server, but in reality merely acts as an intermediary that forwards the client's requests to one or more ordinary web servers
-
-- venv is a python virtual environment that allows us to build dependencies for the project the venv folder is packaged in. It contains all the libraries required to run our current project without messing with the global repository of libraries in your device. This prevents any conflicts between the global version of a certain module and the version required to run the current project. 

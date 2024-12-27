@@ -1,3 +1,7 @@
+**This file is for me to log my progress. You don't have to read it thoroughly although I hope you do, but I totally understand if you don't since it is very long, I've noted down all the important info from this document in [[Random Info]], [[Dependencies]] and [[DDoS_Docs/Project Till Now]], read those instead. If you do get stuck up somewhere, I most likely have written about it in this document, or just ask me.** 
+
+For now, the Fundamentals noted down in the Fundamentals folder are more than enough to get us started on the basic implementation. We will add more after we hit a resource exhaustion point.
+
  #Log1 {26-12-2024 [17:59:00]}
 
 Okay, finally! I have to start implementing this project if we want to keep our deadline. IT's 26th December 1800 hours exactly (O __ O)!!
@@ -32,7 +36,7 @@ Then run the web server in the same directory:
 
 Then run the attacker script in the attacker directory:
 	(Assuming you're in the project directory named cn_ddos_protection_python)
-	#Terminal1
+	#Terminal3
 	`cd attacker`
 	`source attacker_venv\bin\activate`
 	`python layer7_http_flood.py`
@@ -43,4 +47,44 @@ Now the reason for this is the flask server doesn't have enough threads to handl
 
 What's the fix: I have to use Gunicorn which is a production-grade web server for flask to handle high concurrency. Also I have to increase OS level system resource limits to handle large number of connections.
 
-BUT, all of this is for tomorrow,  I'm gonna make my commit for today and get to the other stuff I have pending... (See you tomorrow Rajjo!)
+BUT, all of this is for tomorrow,  I'm gonna make my commit for today and get to the other stuff I have pending... 
+(See you tomorrow Rajjo!)
+{28-12-2024 [1:37:00]}
+
+#Log2 {27-12-2024 [16:56:00]}
+
+Okay! Time to implement those fixes we talked about yesterday.
+I'm gonna first try to get gunicorn to work with my already existing program which I'm gonna install inside webserver venv.
+Well that didn't take long, just installed it and works out of the box. 
+Every single request sent on the webserver is appropriately served now. 
+Now let's try some CPU intensive task and allowing greater bandwidth for the server.
+Okay for CPU intensive task I'm trying to hash a short message a million times which I guess intensive load on the CPU (ChatGPT's suggestion). The bandwidth for the server I don't think requires much attention.
+
+The gunicorn thing worked like magic. I'm currently employing 8 workers (8 separate threads) with the following command:
+
+	gnicorn -c gunicorn_config.py main:web
+	#This runs the web app from main.py file using the configuration options stored in the file gunicorn_config.py.
+
+And I can already see improved performance, the CPU is being used at 80%, and none of the packets are dropped for the attacker.
+Great! A new task is added to the list, to learn to use gunicorn. It is a great tool.
+
+BUT this doesn't seem to work the way we expected, we expected as the number of requests sent on the web server increases, the more it consumes the resources of the server's processor and memory, and more effective the attack is and closer does the server get to crashing, however the usage in resources completely depends on the number of worker threads I choose to give to gunicorn. Admittedly, it did throttle the bandwidth, so much so that the thousandth request takes about a minute to complete. 
+
+Okay a lot of information was gained in the last four minutes of web surfing asking the questions above. So, if a web server is thread bound as in it does not allocate an unlimited number of threads for all incoming requests and only serves a certain number of requests at a time, then no matter how many requests you send number it is impossible to overwhelm the resources of a server using high number of requests, it will queue the requests until its buffer overflows and will not accept anymore requests until its done with the requests at the moment. BUT apparently that is the point, in such cases the legitimate user anywhich ways can't get to the server ruining his experience. Also there are different types of bottlenecks including I/O and CPU, and CPU bottlenecks are hard to find in real life servers, so I might have to create a database in flask.
+
+Okay I'm making some huge decisions for our project (sorry, Rajjo!), including choosing to use mysql. I have to download this shit, install and configure it. I also have to create a user in the server and a database specific for the project. This will be incredibly hard to get to work in your laptop. I will try to write a script that will automate this process.
+Name of the database is 'ddos_webserver'
+Name of the user is 'ddos_user'
+Password for the user is 'ddos'
+
+I had a question just now, we are specifying the host and port in both the flask script as well as the gunicorn_config.py file. I hope it won't get messed up if somehow they mismatch. ChatGPT clearifies:
+The `app.run()` method in Flask is typically used for running the server in development mode. If you provide the `host` and `port` arguments, Flask will start the server on the specified address. But, in production (when using Gunicorn), this method is not used to run the server. 
+I'll just remove fucking function then.
+
+Okay, now we have a problem of having our databases aligned perfectly. My initial solution was to drop and recreate the table every time you run the server. But that shit too volatile man! Instead I've just created a sql file that will create a tasks table in mysql which we will be using on our web server btw, your automated script will handle that part for you too now.
+
+With that, I'mma call it a day. It's 3:30 AM and my father is on the verge of beating me up if he finds me awake the next time he momentarily opens his eyes from his sleep. I'll make my daily commit now. On the agenda tomorrow is finishing the database and forward... Man I've really started to LOVE archlinux.
+
+FUCK I JUST REALIZED I HAVEN'T DONE MY DAILY LEETCODE QUESTION!!!
+(Bye!!)
+{28-12-2024 [3:32:24]}
