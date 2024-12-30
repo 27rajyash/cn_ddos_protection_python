@@ -9,6 +9,7 @@ Acronyms
 	RDBMS: Relational Database Management System
 	SQL: Structered Query Language
 	JSON: JavaScript Object Notation
+	SSL: Secure Socket Layer (certificate)
 
 Linux (Or Mac) (- _ -) Commands
 
@@ -18,3 +19,6 @@ Linux (Or Mac) (- _ -) Commands
 	lsof: List open files
 	iftop: Check network usage
 	[command] &: Adding an & to [command] in linux runs [command] in background making the terminal available for further use.
+	ifconfig: See networking devices and their properties on the device.
+	ps aux | grep '<process>': Get all the processes running with name that includes the string '<process>'.
+	pkill <process>: Kill all processes like <process>.

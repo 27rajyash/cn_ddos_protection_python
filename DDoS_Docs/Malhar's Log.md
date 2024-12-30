@@ -1,4 +1,4 @@
-**This file is for me to log my progress. You don't have to read it thoroughly although I hope you do, but I totally understand if you don't since it is very long, I've noted down all the important info from this document in [[Random Info]], [[Dependencies]] and [[DDoS_Docs/Project Till Now]], read those instead. If you do get stuck up somewhere, I most likely have written about it in this document, or just ask me.** 
+re**This file is for me to log my progress. You don't have to read it thoroughly although I hope you do, but I totally understand if you don't since it is very long, I've noted down all the important info from this document in [[Random Info]], [[Dependencies]] and [[DDoS_Docs/Project Till Now]], read those instead. If you do get stuck up somewhere, I most likely have written about it in this document, or just ask me.** 
 
 For now, the Fundamentals noted down in the Fundamentals folder are more than enough to get us started on the basic implementation. We will add more after we hit a resource exhaustion point.
 
@@ -88,3 +88,53 @@ With that, I'mma call it a day. It's 3:30 AM and my father is on the verge of be
 FUCK I JUST REALIZED I HAVEN'T DONE MY DAILY LEETCODE QUESTION!!!
 (Bye!!)
 {28-12-2024 [3:32:24]}
+
+
+#Log3 {28-12-2024 [20:50:07]}
+
+Fuck! I started very late today, although I was out for half of the day so...
+Let's get started on that web server.
+Man I love doing absolutely meaningless things instead of coding, like changing the font colour of comments and strings.
+
+Reqwest does make our job easier to understand (not to implement since ChatGPT is carrying the heavy load).
+Okay a lot of debugging in the mysql server later, we are finally able to connect to the database. (Few seconds later...) I guess not.
+
+{(In Spongebob Squarepants voiceover) Few hours later...}
+I wish I could kill myself. God why am I so stupid. I had downloaded the wrong sql server. Instead of mysql I had downloaded MariaDB which is a fork of mysql but not quite mysql.
+Okay so there is no mysql package on the AUR or the pacman official repository. Apparently because mysql is proprietary (owned by oracle) and oracle being annoying doesn't help. Guess I gotta perform sacrilege as well now Also I gotta undo all the things that I did yesterday (requirements.txt and automation script).
+
+https://www.reddit.com/r/archlinux/comments/s5ccq9/installing_mysql_not_mariadb_on_arch_linux/
+This is very relevant post to my current problem.
+https://www.reddit.com/r/archlinux/comments/s5ccq9/comment/kvp25q2/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+This comment is golden.
+
+FINALLY! After a fuck ton of installations, configurations and debugging later which I can't bring myself to care about enough to write all of them down, our mysql backended server works with no problems... for now. Well it only has two functions, add a task and show tasks, so fuck it. This took too much time. Rest assured the code is self-explanatory. If you come across mysql installation, which I know you will, just ask me.
+
+Somehow there are more tasks added than the attacker script intended. But that's for tomorrow morning (I promise!).
+I'm calling it a day. I'm tired.
+Bye Rajjo!
+{29-12-2024 [12:28:08]}
+
+
+#Log4 {29-12-2024 [11:49:07]}
+
+I promised morning, and it is morning... Let's get this bitch started.
+
+I've redirected the output of each script to a log file now. Also made a script in python to clear all those logs.
+Okay right now I'm sending about twenty thousand http_flood requests and it takes about 39 seconds for server to serve all of them, the cpu_usage is pretty high at 98% max because of the 10 workers we're employing.
+
+Now, first of all I'm concerned where the fuck Rajjo is and I'm skeptical that I'm doing the same thing that I did with Surlimar. I don't mind doing that, but it is very non-cooperative of me. 
+
+Next thing I'll focus on implementing logging where the requests are coming from to my web server and then implementing a rate limiting method.
+LOG EVERYTHING!!! NOTHING SHOULD BE PRINTED ON TERMINAL, EVERYTHING IN THE FUCKING BACKGROUND!!! (EVIL LAUGHTER) HAHAHAHAHAHAHA!!!!
+
+Okay in order to implement the rate limiting method, we can go one of the two ways. One is the already present flask-limiter library or creating our own limiter, we'll try both but I'm inclined towards creating our own for now. That will show that we understand what rate-limiters are.
+The rate limiter works. It wasn't much work honestly. Since we have limited each worker to about 100 requests, 10 worker allow about 1000 requests per minute.
+I've also added graphical representation of how many requests from which IP. But the problem is it will visualize data since the server was started and I'm not sure I want to do that. Maybe only last minute are so.
+
+God do I hate ChatGPT comments, explaining the most basic things possible.  
+
+
+#Log4 {30-12-2024 [12:46:07]}
+
+There was no outro for yesterday's log and I don't think that I'll be able to do much today either or tomorrow as a matter of fact because I have other stuff (Abhiyanta)!

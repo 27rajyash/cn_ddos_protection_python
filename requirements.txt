@@ -6,9 +6,10 @@
 # However if you wish, you can install the following dependencies in the global settings.
 psutil
 mysql   # This one you have to install global using your package manager (pacman for my arch).
+        # Apparently this shit can't be downloaded from pacman or AUR on arch because reasons. Just go to oracle's website.
         # I've written a shell script to automate the installation of this one at ./setup, for you I've written it in Mac.
         # Remember to type in your own root password for both your system and mysqlserver before executing the file.
-        # Just keep in mind that it is untested. 
+        # Just keep in mind that it is untested. Most probably it will fail. I will test it later.
 
 #The following dependencies HAVE to be installed in their respective python virtual environments.
 

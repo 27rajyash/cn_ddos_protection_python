@@ -1,3 +1,8 @@
+CREATE DATABASE ddos_webserver;
+
+CREATE USER 'ddos_user'@'localhost' IDENTIFIED BY 'ddos';
+GRANT ALL PRIVILEGES ON ddos_webserver.* TO 'ddos_user'@'localhost' WITH GRANT OPTION;
+
 USE ddos_webserver;
 
 DROP TABLE IF EXISTS tasks;

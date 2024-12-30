@@ -1,25 +1,16 @@
 from flask import Flask, request, jsonify
-import mysql.connector
-from mysql.connector import Error
-import hashlib
+from database import create_connection, heavy_computation
+from rate_limiter import log_request, limit_rate
+# from flask_limiter import Limiter
+# from flask_limiter.util import get_remote_address
 
 web = Flask(__name__)
-
-# MySQL database credentials
-MYSQL_HOST = 'localhost'
-MYSQL_DATABASE = 'ddos_webserver'
-MYSQL_USER = 'ddos_user'
-MYSQL_PASSWORD = 'ddos'
+# limiter = Limiter(get_remote_address, app=web, default_limits=["200 per minute"])
 
 
 @web.route('/', methods=['GET'])
 def home():
     return "This is a test server for our DDoS protection application."
-
-
-def heavy_computation():
-    for _ in range(10**6):
-        hashlib.sha256(b"Attack simulation").hexdigest()
 
 
 @web.route('/computational-task', methods=['GET'])
@@ -28,33 +19,15 @@ def heavy_task():
     return f"Heavy work has been completed!", 200
 
 
-# Function to create a MySQL connection
-def create_connection():
-    try:
-        connection = mysql.connector.connect(
-            host=MYSQL_HOST,
-            database=MYSQL_DATABASE,
-            user=MYSQL_USER,
-            password=MYSQL_PASSWORD
-        )
-        if connection.is_connected():
-            print("Connected to MySQL database")
-            return connection
-    except Error as e:
-        print("Error while connecting to MySQL", e)
-    return None
-
-
-# This function will create the database from ./ddos_database.sql.
-def create_database():
-    pass
-
-
 # Route to insert data into MySQL
 @web.route('/add-task', methods=['POST'])
+@limit_rate(max_requests=100, window_size=60)
 def add_task():
     connection = create_connection()
     if connection is not None:
+        client_ip = request.remote_addr
+        log_request(client_ip, "Method: Post - @web/add-task")
+
         cursor = connection.cursor()
         task_name = request.json.get('task_name')
         task_description = request.json.get('task_description')
@@ -66,18 +39,30 @@ def add_task():
         cursor.close()
         connection.close()
         return jsonify({"message": "Task added successfully!"}), 201
-    return jsonify({"message": "Failed to connect to the database."}), 500
+    
+    else:
+        return jsonify({"message": "Failed to connect to the database."}), 500
 
 
 # Route to fetch tasks from MySQL
 @web.route('/tasks', methods=['GET'])
+@limit_rate(max_requests=100, window_size=60)
 def get_tasks():
     connection = create_connection()
     if connection is not None:
+        client_ip = request.remote_addr
+        log_request(client_ip, "Method: GET - @web/tasks")
+
         cursor = connection.cursor(dictionary=True)
         cursor.execute("SELECT * FROM tasks")
         tasks = cursor.fetchall()
         cursor.close()
         connection.close()
         return jsonify(tasks), 200
-    return jsonify({"message": "Failed to connect to the database."}), 500
+    
+    else:
+        return jsonify({"message": "Failed to connect to the database."}), 500
+
+
+if __name__ == "__main__":
+    web.run(debug=True, host='0.0.0.0', port=8000, threaded=True) 
