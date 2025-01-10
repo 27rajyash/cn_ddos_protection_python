@@ -1,6 +1,7 @@
 - DDoS protection services are provided by companies like Cloudflare and AWS. Although functional they cost a lot of money to employ, rightfully so, I cannot imagine the amount of resources that they must have to provide event to route all the traffic through their reverse proxies.
 
-- In computer networks, a ==reverse_proxy== or surrogate server is a proxy server that appears to any client to be an ordinary web server, but in reality merely acts as an intermediary that forwards the client's requests to one or more ordinary web servers
+- In computer networks, a reverse_proxy or surrogate server is a proxy server that appears to any client to be an ordinary web server, but in reality merely acts as an intermediary that forwards the client's requests to one or more ordinary web servers.
+	- A forward proxy, often called a proxy, proxy server, or web proxy, is a server that sits in front of a group of client machines. When those computers make requests to sites and services on the Internet, the proxy server intercepts those requests and then communicates with web servers on behalf of those clients, like a middleman.
 
 - venv is a python virtual environment that allows us to build dependencies for the project the venv folder is packaged in. It contains all the libraries required to run our current project without messing with the global repository of libraries in your device. This prevents any conflicts between the global version of a certain module and the version required to run the current project. 
 
@@ -40,3 +41,5 @@
 			`print(f"Hello, {name}!")`
 
 - In Python, locks are a synchronization mechanism used to control access to shared resources in a multi-threaded environment. They help prevent race conditions, where multiple threads try to access and modify the same data simultaneously, leading to unpredictable and incorrect results.
+
+- In an HTTP server, "keep-alive" refers to a feature that allows a single TCP connection to remain open for multiple HTTP requests and responses, instead of closing the connection after each request, significantly improving website performance by reducing the overhead of establishing new connections for every request; essentially, it enables a persistent connection where multiple requests can be sent over the same connection

@@ -10,6 +10,8 @@ Acronyms
 	SQL: Structered Query Language
 	JSON: JavaScript Object Notation
 	SSL: Secure Socket Layer (certificate)
+	WSGI: Webserver Gateway Interface
+	gunicorn: Green UnicornE
 
 Linux (Or Mac) (- _ -) Commands
 
@@ -22,3 +24,4 @@ Linux (Or Mac) (- _ -) Commands
 	ifconfig: See networking devices and their properties on the device.
 	ps aux | grep '<process>': Get all the processes running with name that includes the string '<process>'.
 	pkill <process>: Kill all processes like <process>.
+	source <path>: Activate a virtual environment from the <path>.

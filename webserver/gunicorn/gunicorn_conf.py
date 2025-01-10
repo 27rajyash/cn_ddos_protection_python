@@ -1,0 +1,10 @@
+bind = "0.0.0.0:8000"
+workers = 4
+worker_class = "gevent"
+timeout = 60
+accesslog = "gunicorn/gunicorn_access.log"
+errorlog = "gunicorn/gunicorn.log"
+loglevel = "info"
+reload = True
+daemon = True
+pid = "gunicorn/gunicorn.pid"

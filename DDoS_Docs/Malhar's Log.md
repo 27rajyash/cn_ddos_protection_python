@@ -1,4 +1,4 @@
-re**This file is for me to log my progress. You don't have to read it thoroughly although I hope you do, but I totally understand if you don't since it is very long, I've noted down all the important info from this document in [[Random Info]], [[Dependencies]] and [[DDoS_Docs/Project Till Now]], read those instead. If you do get stuck up somewhere, I most likely have written about it in this document, or just ask me.** 
+re**This file is for me to log my progress. You don't have to read it thoroughly although I hope you do, but I totally understand if you don't since it is very long, I've noted down all the important info from this document in [[Random Info]], [[Dependencies]] and [[Project Till Now]], read those instead. If you do get stuck up somewhere, I most likely have written about it in this document, or just ask me.** 
 
 For now, the Fundamentals noted down in the Fundamentals folder are more than enough to get us started on the basic implementation. We will add more after we hit a resource exhaustion point.
 
@@ -138,3 +138,22 @@ God do I hate ChatGPT comments, explaining the most basic things possible.
 #Log4 {30-12-2024 [12:46:07]}
 
 There was no outro for yesterday's log and I don't think that I'll be able to do much today either or tomorrow as a matter of fact because I have other stuff (Abhiyanta)!
+
+Okay I just learned that there is no point in employing 8 workers, they can only work one at a time. The reason being I've put them in 'sync' mode, I have to change that to 'gevant' (see [[Dependencies]]. Also the workers are concurrently changing the request_data={} dictionary in rate_limiter.py so I also have to implement shared memory for them to share. Pretty simple upgrades but took a while and had to download two new [[Dependencies]]. One of them is redis for which you also have to download a separate redis-server application and run it in the background. Although much simpler to download and implement than mysql. 
+
+I'm gonna run the redis server in the same directory as my project so that it doesn't clutter my arch linux. It's .conf file and .log file will also be in project folder. I want to do the same thing with mysql server but I doubt I can get Rajjo to work with that...
+YOU KNOW WHAT, I'mma do it anyways.
+
+
+#Log5 {2-1-2025 [00:08:12]}
+
+I don't know what happened the last two days but I neither had fun nor did I work on this project.
+
+Okay, so what we'll be doing today is that we'll make a reverse proxy using nginx for our web server. For definition of reverse proxy see [[Random Info]] and for nginx see [[Dependencies]]. Okay now we come across a dilemma, it appears that our rate limiter should be in the reverse proxy which is our nginx. Now that's totally possible to do but that doesn't show that we know what a rate limiter is and how to implement it. Plus I'm also getting skeptical about the fact that we are not implementing anything at all, its all already coded. We are just using the already existing implementation and putting it all together. That doesn't necessarily show that we can code all of the underlying programs ourselves which we can't. But we are committed to making this project as lifelike as possible so you know what we have to do.
+
+
+#Log6 {3-1-2025 [20:39:12]}
+
+I've installed a reverse proxy on the webserver using nginx. I'm not gonna into details of its configuration just now. Rest assured, its configuration, error_log, access log are all stored in the project folder. I've also made separate folders for gunicorn, redis and nginx to store their respective files. I want to store everything related to the project in the project folder itself.
+
+nginx does nothing other than capture all the incoming http requests and send them over to gunicorn as of now. However, according to standard practice, we should employ the rate limiter function at this reverse proxy. But we'll look at that later, right now, we should focus on getting as many ddos mitigation techniques as possible. Next in line is blacklisting ips based on traffic. You know what this is a good point to make a commit. The project works as expected.

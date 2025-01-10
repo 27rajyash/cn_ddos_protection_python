@@ -13,10 +13,10 @@ def home():
     return "This is a test server for our DDoS protection application."
 
 
-@web.route('/computational-task', methods=['GET'])
-def heavy_task():
-    heavy_computation()
-    return f"Heavy work has been completed!", 200
+# @web.route('/computational-task', methods=['GET'])
+# def heavy_task():
+#     heavy_computation()
+#     return f"Heavy work has been completed!", 200
 
 
 # Route to insert data into MySQL

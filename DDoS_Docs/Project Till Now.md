@@ -4,20 +4,26 @@ I'm making this list as a note of what are our goals are at the moment, what we 
 This is just for me, read it, don't edit it (-\_-)!
 ### Goal List
 - [ ] To create a DDoS Defense Mechanism
+	- [ ] To create a simple web server as our test subject.
+		- [x] To Learn about Flask framework in python to implement a simple web server.
 	- [ ] To create a DDoS attacker
-		- [ ] To create a simple Layer 7 HTTP flood attacker 
-			- [x] To Learn about Flask framework in python to implement a simple web server.
-			- [x] Setup separate virtual environments for the webserver and attacker.
+		- [x] Setup separate virtual environments for the webserver and attacker.
+		- [x] To create a simple Layer 7 HTTP flood attacker using python. 
 			- [x] To Learn about Request HTTP library in python to send and request HTTP packets in the newer .json format for our attacker script.
-			- [x] Create a resource monitor script to constantly monitor the performance of the server including CPU usage, memory and network bandwidth.
-			- [x] To learn about gunicorn and its configuration to run a production web page using python frameworks.
-			- [ ] To learn about Docker containers to safely run attacking scripts on my laptop. 
-			- [ ] To learn how to implement mysql databases in Flask framework in python.
-			- [ ] To create a shell script to automate the installation of mysql so anybody trying to fork this project has a better time. 
-			- [ ] Implement a log to track what requests come on the server and deploy a rate limiting method.
-			- [ ] Learn how to implement decorators and wrappers in python 
-- [ ] To learn how to write shell/batch scripts which will automate setting up our project.
-- [ ] To learn how to write tests and documentation.
+	- [ ] To improve the web server to add features.
+		- [x] Create a resource monitor script to constantly monitor the performance of the server including CPU usage, memory and network bandwidth.
+		- [x] To learn about gunicorn and its configuration to run a production web page using python frameworks.
+		- [x] To learn how to implement mysql databases in Flask framework in python.
+		- [ ] Learn how to implement decorators and wrappers in python
+	- [ ] Figure out a way to implement a DDoS attack using as few devices as possible.
+		- [ ] To learn about Docker containers to safely run attacking scripts on my laptop. 
+	- [ ] Add DDoS Detection, Prevention and Mitigation mechanisms.
+		- [ ] Implement a log to track what requests come on the server and deploy a rate limiting method.
+		- [ ]  Improve the rate limiter by running the webserver workers in asynchronous mode and sharing the same memory database.
+- [ ] Make the project in accordance with good coding practices.
+	- [ ] To create a shell script to automate the installation of mysql so anybody trying to fork this project has a better time. 
+	- [ ] To learn how to write shell/batch scripts which will automate setting up our project.
+	- [ ] To learn how to write tests and documentation.
 
 #### Important Notes to Rajjo:
 This is the section where I will write down all the (extremely, project-breaking/making) important one line information that has developed through my project building process.
@@ -37,7 +43,7 @@ This is the section where I will write down all the (extremely, project-breaking
 
 #### Instructions on how to run the project in its current state.
 
-#Setup
+#Database_Setup
 To setup the mysql server database and its user. (Only one time use!)
 Before doing this make sure your mysql server service is running.
 Open a terminal in the root directory of our project.
@@ -46,7 +52,10 @@ Open a terminal in the root directory of our project.
 `ddos`
 `source ./webserver_database.sql`
 
-
+#Run_Setup
+Run the following commands in any terminal to start mysql and redis servers.
+	`sudo systemctl start mysql` //Any terminal works fine.
+	
 #Terminal1 
 To open the webserver. Before doing this make sure your mysql server service is running.
 Open a terminal in the root directory of our project.

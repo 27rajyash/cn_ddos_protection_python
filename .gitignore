@@ -5,3 +5,4 @@ __pycache__
 temp*
 
 ddos_vscode_connection.session.sql
+redis_shared_memory

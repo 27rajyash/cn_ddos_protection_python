@@ -30,7 +30,7 @@ def remove_excess():
             connection.commit()
             cursor.close()
             connection.close()
-            print("Remove all the unnecessary tasks from tasks table of database 'ddos_webserver'.")
+            print("Removed all the unnecessary tasks from tasks table of database 'ddos_webserver'.")
     
     except Error as e:
         print("Error while connecting to MySQL:", e)

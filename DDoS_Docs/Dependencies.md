@@ -41,3 +41,13 @@ mysql:
 
 mysql-connector-python:
 	MySQL Connector/Python is an API that allows Python programs to access MySQL databases.
+
+gevent:
+	Gevent is a Python networking library that uses coroutines to simplify asynchronous programming and improve multitasking. Used to run the gunicorn workers asynchronously.
+
+redis:
+	Redis is **an in-memory key-value pair database typically classified as a NoSQL database**. Redis is commonly used for caching, transient data storage and as a holding area for data during analysis in Python applications. Used to run the gunicorn workers in same shared memory.
+
+nginx:
+	NGINX is open-source web server software used for reverse proxy, load balancing, and caching. It provides HTTPS server capabilities and is mainly designed for maximum performance and stability. By implementing event-driven, asynchronous, and non-blocking models, NGINX uses master-slave architecture.
+	It also uses an advanced event-based mechanism in many operating systems. Additionally, NGINX uses multiplexing and event notifications and dedicates specific tasks to separate processes. For example, if you have 10 tasks, 10 different processes will handle each of them. NGINX processes highly efficient run loops in a single-thread process called workers.
